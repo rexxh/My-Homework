@@ -1,0 +1,135 @@
+// матрикс.cpp: определяет точку входа для консольного приложения.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "stdlib.h"
+#include <fstream>
+#include <clocale>
+#include <conio.h>
+#include "Matrix.h"
+
+
+using namespace std;
+
+
+	int _tmain(int argc, _TCHAR* argv[])
+	{
+		setlocale(LC_CTYPE, "Russian");
+		int x; // выбор
+		cout << "   1. Записать в файл матрицу;\n   2. Прочитать файл;\n   3. Выполнить сложение двух матриц;\n   4. Выполнить умножение двух матриц;\n   5. Прочитать k-ую строку матрицы;\n   6. Получить кол-во строк и столбцов\n\n";
+		cin >> x;
+		cout << endl;
+		switch (x) {
+		case 1: {
+					int n; //кол-во строк
+					int m; //кол-во столбцов
+					char  p[32];
+					cout << "Введите путь к файлу:";
+					cin >> p;
+					cout << "Введите кол-во строк:";
+					cin >> n;
+					cout << "Введите кол-во столбцов:";
+					cin >> m;
+					Matrix object1(n, m);
+					object1.Path(p);
+					break; }
+
+		case 2:	{
+					char  p[32];
+					cout << "Введите путь к файлу:";
+					cin >> p;
+					fin.open(p);
+					if (!fin.is_open()) // если файл не открыт
+						cout << "Файл не может быть открыт!\n"; // сообщить об этом
+					else
+					{
+						char buff[50];
+						while (!fin.eof())
+						{
+							fin.getline(buff, 50); // считали строку из файла
+							cout << buff << endl;
+						}
+						fin.close(); // закрываем файл 
+					}
+					break; }
+		
+
+		case 3: {
+					char  p[32];
+					int n1; //кол-во строк
+					int n2;
+					int m1; //кол-во столбцов
+					int m2;
+					cout << " Введите размерность первой матрицы: ";
+					cin >> n1 >> m1;
+					cout << " Введите размерность второй матрицы: ";
+					cin >> n2 >> m2;
+					if (n1 == n2 && m1 == m2)
+					{
+						Matrix M1(n1, m1);
+						Matrix M2(n2, m2);
+						cout << "Введите путь к файлу 1-ой матрицы:";
+						cin >> p;
+						M1.Path(p);
+						cout << "Введите путь к файлу 2-ой матрицы:";
+						cin >> p;
+						M2.Path(p);
+						M1 + M2;
+					}
+					else cout << "Ошибка! Матрицы имеют разные размеры." << "\n";
+					break; }
+
+		case 4: {
+					char  p[32];
+					int n1; //кол-во строк
+					int n2;
+					int m1; //кол-во столбцов
+					int m2;
+					cout << " Введите размерность первой матрицы: ";
+					cin >> n1 >> m1;
+					cout << " Введите размерность второй матрицы: ";
+					cin >> n2 >> m2;
+					if (m1 == n2)
+					{
+						Matrix M1(n1, m1);
+						Matrix M2(n2, m2);
+						cout << "Введите путь к файлу 1-ой матрицы:";
+						cin >> p;
+						M1.Path(p);
+						cout << "Введите путь к файлу 2-ой матрицы:";
+						cin >> p;
+						M2.Path(p);
+						M1 * M2;
+					}
+					else cout << "Ошибка! Введите корректные размерности матриц.";
+					break; }
+
+		case 5: {
+					int n, m; //кол-во строк, столбцов
+					int k; //номер нужной строки
+					char p[32];
+					cout << " Введите размерность матрицы: ";
+					cin >> n >> m;
+					Matrix M (n, m);
+					cout << "Введите путь к файлу матрицы:";
+					cin >> p;
+					M.Path(p);
+					M.print();
+					cout << "Номер нужной строки:";
+					cin >> k;
+					M[k];
+					break; }
+		case 6: {
+					int n;
+					int m;
+					cout << " Введите размерность матрицы:\n ";
+					cin >> n >> m;
+					Matrix M(n, m);
+					M.STR(); cout << "x";
+					M.STOLB();
+					break; }
+		};
+		getch();
+	return 0;
+}
