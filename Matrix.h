@@ -49,7 +49,7 @@ public:
 			}
 		}
 	};
-	int Path(char *path)
+	void Set(char *path)
 	{ //Запись в файл
 		fout.open(path);
 		for (int i = 0; i < stroki; i++)
@@ -62,10 +62,9 @@ public:
 			fout << "\n";
 		}
 		fout.close();
-		return 0;
 	};
-	void STR() {  cout << stroki; };
-	void STOLB(){ cout << stolbs; };
+	int STR() {  return stroki; };
+	int STOLB(){ return stolbs; };
 	int print()
 	{ //Вывод на экран
 		for (int i = 0; i < stroki; i++)
@@ -79,7 +78,7 @@ public:
 		return 0;
 	};
 
-	Matrix operator + (Matrix &M2)
+	Matrix operator + ( const Matrix &M2)
 	{ //Оператор сложения 2ух матриц
 		Matrix M3(M2.stroki, M2.stolbs);
 		for (int i = 0; i < M2.stroki; i++)
@@ -89,7 +88,7 @@ public:
 		return M3;
 	};
 
-	Matrix operator * (Matrix &M2)
+	Matrix operator * ( const Matrix &M2)
 	{ //Оператор умножения 2ух матриц
 		Matrix M3(stroki, M2.stolbs);
 		int k = 0;
@@ -108,17 +107,14 @@ public:
 		return M3;
 	}
 
-	Matrix operator [] (int k)
-	{ //Оператор печать k-ой строки матрицы
-		Matrix M(1, stolbs);
-		cout << "\n";
+	double * operator [] (int k)
+	{
+		double* stroka = new double[stolbs];
 		for (int j = 0; j < stolbs; j++)
 		{
-			M.e[0][j] = e[k - 1][j];
-			cout << M.e[0][j] << " ";
+			stroka[j] = e[k - 1][j];
 		}
-
-		return M;
+		return stroka;
 
 
 	};

@@ -32,7 +32,7 @@ using namespace std;
 					cout << "Введите кол-во столбцов:";
 					cin >> m;
 					Matrix object1(n, m);
-					object1.Path(p);
+					object1.Set(p);
 					break; }
 
 		case 2:	{
@@ -71,10 +71,10 @@ using namespace std;
 						Matrix M2(n2, m2);
 						cout << "Введите путь к файлу 1-ой матрицы:";
 						cin >> p;
-						M1.Path(p);
+						M1.Set(p);
 						cout << "Введите путь к файлу 2-ой матрицы:";
 						cin >> p;
-						M2.Path(p);
+						M2.Set(p);
 						M1 + M2;
 					}
 					else cout << "Ошибка! Матрицы имеют разные размеры." << "\n";
@@ -96,10 +96,10 @@ using namespace std;
 						Matrix M2(n2, m2);
 						cout << "Введите путь к файлу 1-ой матрицы:";
 						cin >> p;
-						M1.Path(p);
+						M1.Set(p);
 						cout << "Введите путь к файлу 2-ой матрицы:";
 						cin >> p;
-						M2.Path(p);
+						M2.Set(p);
 						M1 * M2;
 					}
 					else cout << "Ошибка! Введите корректные размерности матриц.";
@@ -109,16 +109,22 @@ using namespace std;
 					int n, m; //кол-во строк, столбцов
 					int k; //номер нужной строки
 					char p[32];
+					double *stroka;
 					cout << " Введите размерность матрицы: ";
 					cin >> n >> m;
 					Matrix M (n, m);
 					cout << "Введите путь к файлу матрицы:";
 					cin >> p;
-					M.Path(p);
+					M.Set(p);
 					M.print();
+					//stroka = new double[m];
 					cout << "Номер нужной строки:";
 					cin >> k;
-					M[k];
+					stroka = M[k];
+					for (int i = 0; i < m; i++)
+					{
+						cout << stroka[i] <<" ";
+					}
 					break; }
 		case 6: {
 					int n;
@@ -126,8 +132,9 @@ using namespace std;
 					cout << " Введите размерность матрицы:\n ";
 					cin >> n >> m;
 					Matrix M(n, m);
-					M.STR(); cout << "x";
-					M.STOLB();
+					n = M.STR();
+					m = M.STOLB();
+					cout << n << "x" << m;
 					break; }
 		};
 		getch();
