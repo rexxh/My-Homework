@@ -115,7 +115,29 @@ public:
 			stroka[j] = e[k - 1][j];
 		}
 		return stroka;
-
-
 	};
+
+	Matrix operator = (const Matrix &M2);
+	{
+		for (int i = 0; i < stolbs; i++)
+		{
+			delete[]e[i];
+		}
+		delete[]e;
+		stroki = M2.stroki;
+		stolbs = M2.stolbs;
+		e = new double *[stroki]
+		for (int i = 0; i < stroki; i++)
+		{
+			e[i] = new double[strolbs];
+		}
+		for (int i = 0; i < stroki; i++)
+		{
+			for (int j = 0; j < stroki; j++)
+			{
+				e[i][j] = M2.e[i][j];
+			}
+		}
+		return *this;
+	}
 };
