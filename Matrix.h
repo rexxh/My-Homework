@@ -21,7 +21,7 @@ public:
 			e[i] = new double[m];
 	};
 	Matrix(const Matrix &M) : stroki(M.stroki), stolbs(M.stolbs)
-	{ //Конструктор копирования
+	{ //ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЄГ®ГЇГЁГ°Г®ГўГ Г­ГЁГї
 		e = new double*[stroki];
 		for (int i = 0; i < stroki; i++)
 		{
@@ -49,7 +49,7 @@ public:
 		}
 	};
 	void Set(char *path)
-	{ //Запись в файл
+	{ //Г‡Г ГЇГЁГ±Гј Гў ГґГ Г©Г«
 		fout.open(path);
 		for (int i = 0; i < stroki; i++)
 		{
@@ -65,7 +65,7 @@ public:
 	int STR() {  return stroki; };
 	int STOLB(){ return stolbs; };
 	int print()
-	{ //Вывод на экран
+	{ //Г‚Г»ГўГ®Г¤ Г­Г  ГЅГЄГ°Г Г­
 		for (int i = 0; i < stroki; i++)
 		{
 			for (int j = 0; j < stolbs; j++)
@@ -78,17 +78,17 @@ public:
 	};
 
 	Matrix operator + ( const Matrix &M2)
-	{ //Оператор сложения 2ух матриц
+	{ //ГЋГЇГҐГ°Г ГІГ®Г° Г±Г«Г®Г¦ГҐГ­ГЁГї 2ГіГµ Г¬Г ГІГ°ГЁГ¶
 		Matrix M3(M2.stroki, M2.stolbs);
 		for (int i = 0; i < M2.stroki; i++)
 		for (int j = 0; j < M2.stolbs; j++)
 			M3.e[i][j] = e[i][j] + M2.e[i][j];
-		cout << "Матрица 1 + Матрица 2=\n"; M3.print();
+		cout << "ГЊГ ГІГ°ГЁГ¶Г  1 + ГЊГ ГІГ°ГЁГ¶Г  2=\n"; M3.print();
 		return M3;
 	};
 
 	Matrix operator * ( const Matrix &M2)
-	{ //Оператор умножения 2ух матриц
+	{ //ГЋГЇГҐГ°Г ГІГ®Г° ГіГ¬Г­Г®Г¦ГҐГ­ГЁГї 2ГіГµ Г¬Г ГІГ°ГЁГ¶
 		Matrix M3(stroki, M2.stolbs);
 		int k = 0;
 		for (int i = 0; i < stroki; i++)
@@ -102,7 +102,7 @@ public:
 				}
 			}
 		}
-		cout << "Матрица 1 * Матрица 2  =\n"; M3.print();
+		cout << "ГЊГ ГІГ°ГЁГ¶Г  1 * ГЊГ ГІГ°ГЁГ¶Г  2  =\n"; M3.print();
 		return M3;
 	}
 
@@ -115,28 +115,20 @@ public:
 		}
 		return stroka;
 	};
+	
+	void swap(Matrix & M2) 
+    {
+        // РѕР±РјРµРЅ РІСЃРµС… С‡Р»РµРЅРѕРІ СЃ M2
+        std::swap(stroki, M2.stroki);
+        std::swap(stolbs, M2.stolbs);
+        std::swap(e, M2.e);
+    };
 
-	Matrix operator = (const Matrix &M2);
+	Matrix & operator = (Matrix M2);
 	{
-		for (int i = 0; i < stolbs; i++)
-		{
-			delete[]e[i];
-		}
-		delete[]e;
-		stroki = M2.stroki;
-		stolbs = M2.stolbs;
-		e = new double *[stroki]
-		for (int i = 0; i < stroki; i++)
-		{
-			e[i] = new double[stolbs];
-		}
-		for (int i = 0; i < stroki; i++)
-		{
-			for (int j = 0; j < stroki; j++)
-			{
-				e[i][j] = M2.e[i][j];
-			}
-		}
-		return *this;
+        // РѕР±РјРµРЅ this СЃ M2
+	  swap(M2);
+          return *this;
+          //M2 СѓРЅРёС‡С‚РѕР¶Р°РµС‚СЃСЏ, РѕСЃРІРѕР±РѕР¶РґР°СЏ РїР°РјСЏС‚СЊ
 	}
 };
