@@ -125,7 +125,7 @@ public:
         std::swap(e, M2.e);
     };
 
-	Matrix & operator = (Matrix M2);
+	Matrix & operator = (Matrix M2)
 	{
         // обмен this с M2
 	  swap(M2);
