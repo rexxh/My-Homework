@@ -7,25 +7,26 @@ using namespace std;
 ofstream fout;
 ifstream fin;
 
+template <typename T>
 class Matrix
 {
 	int stroki;
 	int stolbs;
-	double **e;
+	T **e;
 public:
 	Matrix() : stroki(0), stolbs(0), e(nullptr) {};
 	Matrix(int n, int m) : stroki(n), stolbs(m)
 	{
-		e = new double*[n];
+		e = new T*[n];
 		for (int i = 0; i < n; i++)
-			e[i] = new double[m];
+			e[i] = new T[m];
 	};
 	Matrix(const Matrix &M) : stroki(M.stroki), stolbs(M.stolbs)
 	{ //Êîíñòðóêòîð êîïèðîâàíèÿ
-		e = new double*[stroki];
+		e = new T*[stroki];
 		for (int i = 0; i < stroki; i++)
 		{
-			e[i] = new double[stolbs];
+			e[i] = new T [stolbs];
 		}
 		for (int i = 0; i < stroki; i++)
 		{
@@ -106,9 +107,9 @@ public:
 		return M3;
 	}
 
-	double * operator [] (int k)
+	T * operator [] (int k)
 	{
-		double* stroka = new double[stolbs];
+		T* stroka = new T [stolbs];
 		for (int j = 0; j < stolbs; j++)
 		{
 			stroka[j] = e[k - 1][j];
